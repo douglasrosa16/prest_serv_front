@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Example() {
+export default function Form() {
   return (
       <>
         <div>
