@@ -1,8 +1,63 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 
-//import api from '../../services/api';
+import * as Yup from 'yup';
+import api from '../../services/api';
 
 export default function Cadastro() {
+  const formRef = useRef(null);
+
+  const [nameUser, setNameUser] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [senha, setSenha] = useState('');
+  const [confirmarSenha, setConfirmarSenha] = useState('');
+  const [email, setEmail] = useState('');
+  const [sobre, setSobre] = useState('');
+  const [cep, setCep] = useState('');
+  const [estado, setEstado] = useState('');
+  const [cidade, setCidade] = useState('');
+  const [rua, setRua] = useState('');
+  const [pais, setPais] = useState('');
+   
+  console.log(formRef);
+
+    async function cadastrarUser(event){
+      event.preventDefault();     
+
+      const user = {
+        name: nameUser, 
+        email: email,
+        sobrenome: lastName,
+        senha: senha
+      }
+
+      try {
+        const schema = Yup.object().shape({
+          name: Yup.string().required('Nome obrigatório'), 
+          email: Yup.string().required('E-mail obrigatório').email('Digite um e-mail válido'), 
+          sobrenome: Yup.string(),
+          senha: Yup.string().min(5, 'No mínimo 5 dígitos')
+        });
+
+        await schema.validate(user, {
+          abortEarly: false
+        });
+
+      } catch(err){
+        
+      }      
+
+      api.post('users', 
+        {
+          name: nameUser,
+          email: email,
+          sobrenome: lastName,
+          sobre: sobre,
+          senha: senha
+        }
+      );
+      //Aqui deve retornar meu usuário, preciso pegar o ID para criar o endereço
+
+    };
 
     return (
         <>
@@ -32,11 +87,13 @@ export default function Cadastro() {
                       </label>
                       <div className="mt-1">
                         <textarea
+                          value={sobre}
+                          onChange={(e) => setSobre(e.target.value)}
                           id="about"
                           name="about"
                           rows={3}
                           className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
-                          placeholder="you@example.com"
+                          placeholder="Descreva suas habilidades"
                           defaultValue={''}
                         />
                       </div>
@@ -98,7 +155,7 @@ export default function Cadastro() {
                   <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                     <button
                       type="submit"
-                      className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"                      
                     >
                       Salvar
                     </button>
@@ -133,6 +190,8 @@ export default function Cadastro() {
                           Primeiro nome
                         </label>
                         <input
+                          value={nameUser}
+                          onChange={(e) => setNameUser(e.target.value)}
                           type="text"
                           name="first_name"
                           id="first_name"
@@ -146,6 +205,8 @@ export default function Cadastro() {
                           Ultimo nome
                         </label>
                         <input
+                          value={lastName}
+                          onChange={(e) => setLastName(e.target.value)}
                           type="text"
                           name="last_name"
                           id="last_name"
@@ -153,12 +214,44 @@ export default function Cadastro() {
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
-  
-                      <div className="col-span-6 sm:col-span-4">
+                      
+                      <div className="col-span-6 sm:col-span-3">
+                        <label htmlFor="first_name" className="block text-sm font-medium text-gray-700">
+                          Senha 
+                        </label>
+                        <input
+                          value={senha}
+                          onChange={(e) => setSenha(e.target.value)}
+                          type="text"
+                          name="first_name"
+                          id="first_name"
+                          autoComplete="given-name"
+                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        />
+                      </div>
+                      
+                      <div className="col-span-6 sm:col-span-3">
+                        <label htmlFor="first_name" className="block text-sm font-medium text-gray-700">
+                          Confirmar Senha
+                        </label>
+                        <input
+                          value={confirmarSenha}
+                          onChange={(e) => setConfirmarSenha(e.target.value)}
+                          type="text"
+                          name="first_name"
+                          id="first_name"
+                          autoComplete="given-name"
+                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        />
+                      </div>
+
+                      <div className="col-span-6 sm:col-span-3">
                         <label htmlFor="email_address" className="block text-sm font-medium text-gray-700">
                           Endereço de Email
                         </label>
                         <input
+                          onChange={(e) => setEmail(e.target.value)}
+                          value={email}
                           type="text"
                           name="email_address"
                           id="email_address"
@@ -188,6 +281,8 @@ export default function Cadastro() {
                           Rua
                         </label>
                         <input
+                          value={rua}
+                          onChange={(e) => setRua(e.target.value)}
                           type="text"
                           name="street_address"
                           id="street_address"
@@ -201,6 +296,8 @@ export default function Cadastro() {
                           Cidade
                         </label>
                         <input
+                          value={cidade}
+                          onChange={(e) => setCidade(e.target.value)}
                           type="text"
                           name="city"
                           id="city"
@@ -213,6 +310,8 @@ export default function Cadastro() {
                           Estado
                         </label>
                         <input
+                          value={estado}
+                          onChange={(e) => setEstado(e.target.value)}
                           type="text"
                           name="state"
                           id="state"
@@ -225,6 +324,8 @@ export default function Cadastro() {
                           CEP
                         </label>
                         <input
+                          value={cep}
+                          onChange={(e) => setCep(e.target.value)}
                           type="text"
                           name="postal_code"
                           id="postal_code"
@@ -238,6 +339,7 @@ export default function Cadastro() {
                     <button
                       type="submit"
                       className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      onClick={cadastrarUser}
                     >
                       Salvar
                     </button>
