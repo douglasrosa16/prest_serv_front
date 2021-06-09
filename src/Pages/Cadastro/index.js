@@ -1,10 +1,12 @@
 import React, { useState, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import * as Yup from 'yup';
 import api from '../../services/api';
 
 export default function Cadastro() {
-  const formRef = useRef(null);
+  const formRef = useRef(null);  
+  const history = useHistory();
 
   const [nameUser, setNameUser] = useState('');
   const [lastName, setLastName] = useState('');
@@ -16,20 +18,19 @@ export default function Cadastro() {
   const [estado, setEstado] = useState('');
   const [cidade, setCidade] = useState('');
   const [rua, setRua] = useState('');
-  const [pais, setPais] = useState('');
-   
-  console.log(formRef);
+  const [numero, setNumero] = useState('');
+  const [pais, setPais] = useState('Brasil'); 
 
     async function cadastrarUser(event){
       event.preventDefault();     
 
-      const user = {
+      const userValidate = {
         name: nameUser, 
         email: email,
         sobrenome: lastName,
         senha: senha
       }
-
+      
       try {
         const schema = Yup.object().shape({
           name: Yup.string().required('Nome obrigatório'), 
@@ -38,7 +39,7 @@ export default function Cadastro() {
           senha: Yup.string().min(5, 'No mínimo 5 dígitos')
         });
 
-        await schema.validate(user, {
+        await schema.validate(userValidate, {
           abortEarly: false
         });
 
@@ -46,7 +47,7 @@ export default function Cadastro() {
         
       }      
 
-      api.post('users', 
+      const user = await api.post('users', 
         {
           name: nameUser,
           email: email,
@@ -54,9 +55,19 @@ export default function Cadastro() {
           sobre: sobre,
           senha: senha
         }
+      );  
+      const userID = user.data.id;
+      const endUser = await api.post(`users/${userID}/addresses`,
+        {
+          cep: cep,
+          numero: numero,
+          rua: rua,
+          cidade: cidade,
+          pais: pais,
+          estado: estado
+        }
       );
-      //Aqui deve retornar meu usuário, preciso pegar o ID para criar o endereço
-
+      history.push('/');
     };
 
     return (
@@ -276,7 +287,7 @@ export default function Cadastro() {
                         </select>
                       </div>
   
-                      <div className="col-span-6">
+                      <div className="col-span-6 sm:col-span-6 lg:col-span-2">
                         <label htmlFor="street_address" className="block text-sm font-medium text-gray-700">
                           Rua
                         </label>
@@ -290,7 +301,22 @@ export default function Cadastro() {
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
-  
+                      
+                      <div className="col-span-6 sm:col-span-6 lg:col-span-2">
+                        <label htmlFor="street_address" className="block text-sm font-medium text-gray-700">
+                          Numero
+                        </label>
+                        <input
+                          value={numero}
+                          onChange={(e) => setNumero(e.target.value)}
+                          type="text"
+                          name="street_address"
+                          id="street_address"
+                          autoComplete="street-address"
+                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        />
+                      </div>
+
                       <div className="col-span-6 sm:col-span-6 lg:col-span-2">
                         <label htmlFor="city" className="block text-sm font-medium text-gray-700">
                           Cidade
