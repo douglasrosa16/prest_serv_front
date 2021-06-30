@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { MailIcon, PhoneIcon } from '@heroicons/react/solid'
-import api from '../../services/api';
+import { api } from '../../services/api';
+
 
 export default function Dashboard() {
   const [users, setUsers] = useState([]);
-
   const people = [
     {
       name: 'Jane Cooper',
@@ -17,7 +17,7 @@ export default function Dashboard() {
     },   
   ] 
   useEffect(() => {
-   // getUsers();
+    //getUsers();
   },[users]);
 
 
@@ -26,12 +26,11 @@ export default function Dashboard() {
     
     const user = response.data;
 
-    setUsers([...users, user]);
-    console.log(users);
+    setUsers([...users, user]);   
   }
 
     return (
-        <>
+        <>                  
           <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {people.map((person) => (
             <li key={person.email} className="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
@@ -40,7 +39,7 @@ export default function Dashboard() {
                   <div className="flex items-center space-x-3">
                     <h3 className="text-gray-900 text-sm font-medium truncate">{person.name}</h3>
                     <span className="flex-shrink-0 inline-block px-2 py-0.5 text-green-800 text-xs font-medium bg-green-100 rounded-full">
-                      {person.name}
+                      {person.name}                      
                     </span>
                   </div>
                   <p className="mt-1 text-gray-500 text-sm truncate">{person.name}</p>

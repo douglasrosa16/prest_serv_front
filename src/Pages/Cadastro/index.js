@@ -1,19 +1,18 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import * as Yup from 'yup';
-import api from '../../services/api';
+import { api } from '../../services/api';
 
-export default function Cadastro() {
-  const formRef = useRef(null);  
-  const history = useHistory();
+export default function Cadastro() {  
+  const history = useHistory();  
 
   const [nameUser, setNameUser] = useState('');
   const [lastName, setLastName] = useState('');
-  const [senha, setSenha] = useState('');
+  const [password, setPassword] = useState('');
   const [confirmarSenha, setConfirmarSenha] = useState('');
   const [email, setEmail] = useState('');
-  const [sobre, setSobre] = useState('');
+  const [about, setAbout] = useState('');
   const [cep, setCep] = useState('');
   const [estado, setEstado] = useState('');
   const [cidade, setCidade] = useState('');
@@ -27,16 +26,16 @@ export default function Cadastro() {
       const userValidate = {
         name: nameUser, 
         email: email,
-        sobrenome: lastName,
-        senha: senha
+        soblastNamerenome: lastName,
+        password: password
       }
       
       try {
         const schema = Yup.object().shape({
           name: Yup.string().required('Nome obrigatório'), 
           email: Yup.string().required('E-mail obrigatório').email('Digite um e-mail válido'), 
-          sobrenome: Yup.string(),
-          senha: Yup.string().min(5, 'No mínimo 5 dígitos')
+          lastname: Yup.string(),
+          password: Yup.string().min(5, 'No mínimo 5 dígitos')
         });
 
         await schema.validate(userValidate, {
@@ -51,12 +50,12 @@ export default function Cadastro() {
         {
           name: nameUser,
           email: email,
-          sobrenome: lastName,
-          sobre: sobre,
-          senha: senha
+          lastname: lastName,
+          about: about,
+          password: password
         }
       );  
-      const userID = user.data.id;
+      const userID = user.data.id;      
       const endUser = await api.post(`users/${userID}/addresses`,
         {
           cep: cep,
@@ -71,7 +70,7 @@ export default function Cadastro() {
     };
 
     return (
-        <>
+        <>       
         <div>
           <div className="md:grid md:grid-cols-3 md:gap-6">
             <div className="md:col-span-1">
@@ -98,8 +97,8 @@ export default function Cadastro() {
                       </label>
                       <div className="mt-1">
                         <textarea
-                          value={sobre}
-                          onChange={(e) => setSobre(e.target.value)}
+                          value={about}
+                          onChange={(e) => setAbout(e.target.value)}
                           id="about"
                           name="about"
                           rows={3}
@@ -231,9 +230,9 @@ export default function Cadastro() {
                           Senha 
                         </label>
                         <input
-                          value={senha}
-                          onChange={(e) => setSenha(e.target.value)}
-                          type="text"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          type="password"
                           name="first_name"
                           id="first_name"
                           autoComplete="given-name"
@@ -248,7 +247,7 @@ export default function Cadastro() {
                         <input
                           value={confirmarSenha}
                           onChange={(e) => setConfirmarSenha(e.target.value)}
-                          type="text"
+                          type="password"
                           name="first_name"
                           id="first_name"
                           autoComplete="given-name"
