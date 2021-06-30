@@ -1,20 +1,37 @@
-import React, { createContext } from "react";
+import React, { createContext, useState } from "react";
 import { api } from '../services/api';
 
 const AuthContext = createContext({});
 
 const AuthProvider = ({children}) => {
+  //Dessa forma vai buscar os dados do localStorage e colocar como dados iniciais
+  //Para caso reiniciar a página ou fechar
+  const [data, setData] = useState(() => {
+    const token = localStorage.getItem('@Dev:token');
+    const user = localStorage.getItem('@Dev:user');
+    
+    if(token && user){
+      return { token, user: JSON.parse(user)};
+    }
+    return {};    
+  });
+
   const signIn = async({email, password}) => {
     const response = await api.post('sessions', {
       email: email,
       password: password
     });
 
-    console.log(response.data)
+    const { token, user } = response.data;
+
+    localStorage.setItem('@Dev:token', token);
+    localStorage.setItem('@Dev:user', JSON.stringify(user));
+
+    setData({token, user});
   } 
 
   return (
-    <AuthContext.Provider value={{ teste: 'Douglas', signIn }}>
+    <AuthContext.Provider value={{ user: data.user, signIn }}>
       {children}
     </AuthContext.Provider>
   )

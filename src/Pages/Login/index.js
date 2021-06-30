@@ -1,13 +1,12 @@
 import React, { useState, useContext} from 'react';
 import { useHistory } from 'react-router-dom';
-import { api } from '../../services/api';
 
 import { AuthContext } from '../../Context/AuthContext';
 
 export default function Login(){
   const history = useHistory();
   
-  const { signIn } = useContext(AuthContext);
+  const { signIn, user } = useContext(AuthContext);
   const [values, setValues] = useState(initialState);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
