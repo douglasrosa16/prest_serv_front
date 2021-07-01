@@ -2,9 +2,9 @@ import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import * as Yup from 'yup';
-import { api } from '../../services/api';
+import { createUser, endUser }  from '../../services/Controllers/userController';
 
-export default function Cadastro() {  
+export default function CadastroProvider() {  
   const history = useHistory();  
 
   const [nameUser, setNameUser] = useState('');
@@ -18,58 +18,31 @@ export default function Cadastro() {
   const [cidade, setCidade] = useState('');
   const [rua, setRua] = useState('');
   const [numero, setNumero] = useState('');
-  const [pais, setPais] = useState('Brasil'); //Trazer uma lista de Paises
+  const [pais, setPais] = useState('Brasil'); //Trazer uma lista de Paises  
+  
+  const user = {
+    name: nameUser, 
+    email,
+    lastName,
+    about,
+    password
+  };
 
-    async function cadastrarUser(event){
-      event.preventDefault();     
+  const addressUser = {
+    cep: cep,
+    numero: numero,
+    rua: rua,
+    cidade: cidade,
+    pais: pais,
+    estado: estado
+  }
 
-      const userValidate = {
-        name: nameUser, 
-        email: email,
-        soblastNamerenome: lastName,
-        password: password
-      }
-      
-      try {
-        const schema = Yup.object().shape({
-          name: Yup.string().required('Nome obrigatório'), 
-          email: Yup.string().required('E-mail obrigatório').email('Digite um e-mail válido'), 
-          lastname: Yup.string(),
-          password: Yup.string().min(5, 'No mínimo 5 dígitos')
-        });
-
-        await schema.validate(userValidate, {
-          abortEarly: false
-        });
-
-      } catch(err){
-        
-      }      
-
-      const user = await api.post('users', 
-        {
-          name: nameUser,
-          email: email,
-          lastname: lastName,
-          about: about,
-          password: password
-        }
-      );  
-      const userID = user.data.id;      
-      const endUser = await api.post(`users/${userID}/addresses`,
-        {
-          cep: cep,
-          numero: numero,
-          rua: rua,
-          cidade: cidade,
-          pais: pais,
-          estado: estado
-        }
-      );
-      history.push('/');
-    };
-
-    return (
+  function createUserEnd(){
+    const userId = createUser(user);
+    const addressId = endUser(addressUser, userId);
+    
+  }
+  return (
         <>       
         <div>
           <div className="md:grid md:grid-cols-3 md:gap-6">
@@ -364,7 +337,7 @@ export default function Cadastro() {
                     <button
                       type="submit"
                       className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                      onClick={cadastrarUser}
+                      onClick={createUserEnd}
                     >
                       Salvar
                     </button>

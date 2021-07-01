@@ -1,6 +1,4 @@
-import React from 'react';
-
-import api from '../api';
+import { api } from '../api';
 
 //Cadastrar Usuario
 async function createUser({user}){
@@ -12,7 +10,7 @@ async function createUser({user}){
     about: about,
     password: password
   });
-  return userId;
+ return userId;
 }
 
 //Cadastrar Endereco
@@ -29,4 +27,6 @@ async function endUser({address, userId}) {
   );
   return addressId;
 }
+
+export { createUser, endUser }
 

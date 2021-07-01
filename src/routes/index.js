@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import Dashboard from '../Pages/Dashboard';
 import Login from '../Pages/Login';
 import HomeCadastro from '../Pages/HomeCadastro/index';
-import CadastroProvider from '../Pages/CadastroConsumer/index';
+import CadastroProvider from '../Pages/CadastroProvider/index';
 import CadastroConsumer from '../Pages/CadastroConsumer/index';
 
 import { AuthProvider } from '../Context/AuthContext';

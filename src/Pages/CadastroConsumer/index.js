@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 import { api } from '../../services/api';
 
-export default function Cadastro() {  
+export default function CadastroConsumer() {  
   const history = useHistory();  
 
   const [nameUser, setNameUser] = useState('');
