@@ -18,7 +18,6 @@ export default function Login(){
   function onSubmit(event){
     event.preventDefault();
     signIn({email, password})    
-    console.log(user)
     setValues(initialState);
     history.push('/')
   }

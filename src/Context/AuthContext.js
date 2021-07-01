@@ -23,7 +23,7 @@ const AuthProvider = ({children}) => {
     });
 
     const { token, user } = response.data;
-
+    console.log(response.data)
     localStorage.setItem('@Dev:token', token);
     localStorage.setItem('@Dev:user', JSON.stringify(user));
 

@@ -1,4 +1,5 @@
 import { Fragment } from 'react'
+import { Link } from 'react-router-dom';
 import { Popover, Transition } from '@headlessui/react'
 import {
   BookmarkAltIcon,
@@ -158,9 +159,9 @@ export default function Header() {
                   <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
                     Preços
                   </a>
-                  <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
+                  <Link to="/providers" className="text-base font-medium text-gray-500 hover:text-gray-900">
                     Docs
-                  </a>
+                  </Link>
                   <Popover>
                     {({ open }) => (
                       <>

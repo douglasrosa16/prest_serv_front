@@ -1,4 +1,4 @@
-import { Switch, Route, BrowserRouter, Redirect} from 'react-router-dom';
+import { Switch, Route, BrowserRouter, Redirect, Router} from 'react-router-dom';
 
 import Dashboard from '../Pages/Dashboard';
 import Cadastro from '../Pages/Cadastro';
@@ -20,7 +20,7 @@ function PrivateRoute({component: Component, ...rest}){
     )
 }
 
-export default function Routes() {   
+export default function Routes({children}) {   
 
     return (
         <BrowserRouter>
@@ -28,8 +28,8 @@ export default function Routes() {
             <Switch>
                 <Route path="/" exact component={Dashboard}/>
                 <Route path="/cadastrar" component={Cadastro}/>    
-                <Route path="/login" component={Login}/>         
-                <PrivateRoute path="/app" component={() => <h1>Voce esta logado</h1>} />
+                <Route path="/login" component={Login}/>                         
+                <PrivateRoute path="/providers" component={() => <h1>Prestadores de Serviços</h1>} />                
             </Switch>    
             </AuthProvider>
         </BrowserRouter>
