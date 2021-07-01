@@ -16,7 +16,7 @@ const AuthProvider = ({children}) => {
     return {};    
   });
 
-  const signIn = async({email, password}) => {
+  async function signIn ({email, password}){    
     const response = await api.post('sessions', {
       email: email,
       password: password
@@ -30,8 +30,15 @@ const AuthProvider = ({children}) => {
     setData({token, user});
   } 
 
+  function signOut(){
+    localStorage.remoteItem('@Dev:token');
+    localStorage.remoteItem('@Dev:user');
+
+    setData({});
+  }
+  
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn }}>
+    <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   )

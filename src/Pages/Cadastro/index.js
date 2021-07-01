@@ -18,7 +18,7 @@ export default function Cadastro() {
   const [cidade, setCidade] = useState('');
   const [rua, setRua] = useState('');
   const [numero, setNumero] = useState('');
-  const [pais, setPais] = useState('Brasil'); 
+  const [pais, setPais] = useState('Brasil'); //Trazer uma lista de Paises
 
     async function cadastrarUser(event){
       event.preventDefault();     
