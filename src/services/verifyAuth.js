@@ -25,14 +25,12 @@ function validateAuth(token){
 
     const user = {
       id: sub
-    };
-    console.log('Token validado: '+tokenDecodificado)
+    };    
     return true;
   } catch (err){
       console.log('Token JWT Invalido');
       return false;
   }
-  return false;
 }
 
 export { isAuthenticated }
