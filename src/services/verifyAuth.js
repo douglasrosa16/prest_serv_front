@@ -7,6 +7,7 @@ function isAuthenticated(){
 }
 
 function validateAuth(token){
+  console.log('Token: '+token)
   if (token){
     return true
   }

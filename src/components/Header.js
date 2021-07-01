@@ -1,5 +1,7 @@
-import { Fragment } from 'react'
+import { Fragment, useContext } from 'react'
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../Context/AuthContext';
+
 import { Popover, Transition } from '@headlessui/react'
 import {
   BookmarkAltIcon,
@@ -67,6 +69,13 @@ function classNames(...classes) {
 }
 
 export default function Header() {
+  
+  //const { signOut } = useContext(AuthContext); // Não funcionou
+  function signOut(){
+    localStorage.removeItem('@Dev:token');
+    localStorage.removeItem('@Dev:user');
+  }
+
   return (
     <Popover className="relative bg-white">
       {({ open }) => (
@@ -156,12 +165,12 @@ export default function Header() {
                       </>
                     )}
                   </Popover>
-                  <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
+                  <a href="/precos" className="text-base font-medium text-gray-500 hover:text-gray-900">
                     Preços
                   </a>
-                  <Link to="/providers" className="text-base font-medium text-gray-500 hover:text-gray-900">
-                    Docs
-                  </Link>
+                  <a href="/providers" className="text-base font-medium text-gray-500 hover:text-gray-900">
+                    Prestadores de Serviços
+                  </a>
                   <Popover>
                     {({ open }) => (
                       <>
@@ -249,10 +258,13 @@ export default function Header() {
                     )}
                   </Popover>
                 </Popover.Group>
-                <div className="flex items-center md:ml-12">
+                <div className="flex items-center md:ml-8">
+                  <a href="#" onClick={signOut} className="text-base font-medium text-gray-500 hover:text-gray-900" style={{margin: 10}}>
+                    Sair  
+                  </a>
                   <a href="/login" className="text-base font-medium text-gray-500 hover:text-gray-900">
                     Login
-                  </a>
+                  </a>                  
                   <a
                     href="/cadastrar"
                     className="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"

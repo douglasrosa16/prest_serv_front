@@ -30,9 +30,9 @@ const AuthProvider = ({children}) => {
     setData({token, user});
   } 
 
-  function signOut(){
-    localStorage.remoteItem('@Dev:token');
-    localStorage.remoteItem('@Dev:user');
+  function signOut(){    
+    localStorage.removeItem('@Dev:token');
+    localStorage.removeItem('@Dev:user');
 
     setData({});
   }
