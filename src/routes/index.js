@@ -6,6 +6,7 @@ import Login from '../Pages/Login';
 import HomeCadastro from '../Pages/HomeCadastro/index';
 import CadastroProvider from '../Pages/CadastroProvider/index';
 import CadastroConsumer from '../Pages/CadastroConsumer/index';
+import Providers from '../Pages/Providers/index';
 
 import { AuthProvider } from '../Context/AuthContext';
 import { isAuthenticated } from '../services/verifyAuth';
@@ -34,7 +35,7 @@ export default function Routes() {
                 <Route path="/cadastrar-prestador" exact component={CadastroProvider}/>    
                 <Route path="/login" exact component={Login}/>
                 <Route path="/signout" exact component={() => <h1>Voce saiu</h1>}/>                
-                <PrivateRoute path="/providers" component={() => <h1>Prestadores de Serviços </h1>} />
+                <PrivateRoute path="/providers" component={Providers} />
                 <PrivateRoute path="/perfil/consumer" component={() => <h1>Consumidor </h1>} />
                 <PrivateRoute path="/perfil/provider" component={() => <h1>Consumidor </h1>} />                
             </Switch>    
