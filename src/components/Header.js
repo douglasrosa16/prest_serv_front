@@ -110,14 +110,8 @@ export default function Header() {
                             'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                           )}
                         >
-                          <span>Soluções</span>
-                          <ChevronDownIcon
-                            className={classNames(
-                              open ? 'text-gray-600' : 'text-gray-400',
-                              'ml-2 h-5 w-5 group-hover:text-gray-500'
-                            )}
-                            aria-hidden="true"
-                          />
+                          <span>Home</span>
+                          
                         </Popover.Button>
 
                         <Transition
@@ -134,40 +128,13 @@ export default function Header() {
                             static
                             className="hidden md:block absolute z-10 top-full inset-x-0 transform shadow-lg bg-white"
                           >
-                            <div className="max-w-7xl mx-auto grid gap-y-6 px-4 py-6 sm:grid-cols-2 sm:gap-8 sm:px-6 sm:py-8 lg:grid-cols-4 lg:px-8 lg:py-12 xl:py-16">
-                              {solutions.map((item) => (
-                                <a
-                                  key={item.name}
-                                  href={item.href}
-                                  className="-m-3 p-3 flex flex-col justify-between rounded-lg hover:bg-gray-50"
-                                >
-                                  <div className="flex md:h-full lg:flex-col">
-                                    <div className="flex-shrink-0">
-                                      <span className="inline-flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white sm:h-12 sm:w-12">
-                                        <item.icon className="h-6 w-6" aria-hidden="true" />
-                                      </span>
-                                    </div>
-                                    <div className="ml-4 md:flex-1 md:flex md:flex-col md:justify-between lg:ml-0 lg:mt-4">
-                                      <div>
-                                        <p className="text-base font-medium text-gray-900">{item.name}</p>
-                                        <p className="mt-1 text-sm text-gray-500">{item.description}</p>
-                                      </div>
-                                      <p className="mt-2 text-sm font-medium text-indigo-600 lg:mt-4">
-                                        Leia Mais <span aria-hidden="true">&rarr;</span>
-                                      </p>
-                                    </div>
-                                  </div>
-                                </a>
-                              ))}
-                            </div>                            
+                                                      
                           </Popover.Panel>
                         </Transition>
                       </>
                     )}
                   </Popover>
-                  <a href="/precos" className="text-base font-medium text-gray-500 hover:text-gray-900">
-                    Preços
-                  </a>
+                  
                   <a href="/providers" className="text-base font-medium text-gray-500 hover:text-gray-900">
                     Prestadores de Serviços
                   </a>

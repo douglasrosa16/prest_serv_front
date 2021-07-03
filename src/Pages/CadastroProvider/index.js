@@ -1,8 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import * as Yup from 'yup';
 import { createUser, endUser }  from '../../services/Controllers/userController';
+import { createServiceProvider } from '../../services/Controllers/serviceProviderController';
 
 export default function CadastroProvider() {  
   const history = useHistory();  
@@ -18,29 +19,31 @@ export default function CadastroProvider() {
   const [cidade, setCidade] = useState('');
   const [rua, setRua] = useState('');
   const [numero, setNumero] = useState('');
-  const [pais, setPais] = useState('Brasil'); //Trazer uma lista de Paises  
-  
-  const user = {
-    name: nameUser, 
-    email,
-    lastName,
-    about,
-    password
-  };
+  const [pais, setPais] = useState('Brasil'); //Trazer uma lista de Paises   
 
-  const addressUser = {
-    cep: cep,
-    numero: numero,
-    rua: rua,
-    cidade: cidade,
-    pais: pais,
-    estado: estado
-  }
-
-  function createUserEnd(){
-    const userId = createUser(user);
-    const addressId = endUser(addressUser, userId);
+  async function createProvider(event){
+    event.preventDefault();
+    const user = {
+      name: nameUser, 
+      email: email,
+      lastName: lastName,
+      about: about,
+      password: password
+    };   
+    const addressUser = {
+      cep: cep,
+      numero: numero,
+      rua: rua,
+      cidade: cidade,
+      pais: pais,
+      estado: estado
+    }   
+    const {id} = await createUser({user});
     
+    const addressId = await endUser({addressUser}, id);
+    console.log(addressId)
+    const provider = await createServiceProvider(id);
+    history.push('/')
   }
   return (
         <>       
@@ -337,7 +340,7 @@ export default function CadastroProvider() {
                     <button
                       type="submit"
                       className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                      onClick={createUserEnd}
+                      onClick={createProvider}
                     >
                       Salvar
                     </button>
