@@ -17,8 +17,8 @@ export default function Dashboard() {
     },   
   ] 
   useEffect(() => {
-    //getUsers();
-  },[users]);
+    getUsers();    
+  },[]);
 
 
   async function getUsers(){
@@ -26,13 +26,13 @@ export default function Dashboard() {
     
     const user = response.data;
 
-    setUsers([...users, user]);   
+    setUsers(user);   
   }
 
     return (
         <>                  
           <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {people.map((person) => (
+          {users.map((person) => (
             <li key={person.email} className="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
               <div className="w-full flex items-center justify-between p-6 space-x-6">
                 <div className="flex-1 truncate">
@@ -44,7 +44,7 @@ export default function Dashboard() {
                   </div>
                   <p className="mt-1 text-gray-500 text-sm truncate">{person.name}</p>
                 </div>
-                <img className="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0" src={person.name} alt="" />
+                <img className="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="" />
               </div>
               <div>
                 <div className="-mt-px flex divide-x divide-gray-200">
