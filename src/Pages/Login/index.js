@@ -19,7 +19,7 @@ export default function Login(){
     event.preventDefault();
     signIn({email, password})    
     setValues(initialState);
-    history.push('/')
+    history.push('/providers')
   }
 
   return (

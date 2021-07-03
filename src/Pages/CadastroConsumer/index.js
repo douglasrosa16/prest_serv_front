@@ -71,7 +71,7 @@ export default function CadastroConsumer() {
 
     return (
         <>       
-        <div>
+        <div style={{margin:30}}>
           <div className="md:grid md:grid-cols-3 md:gap-6">
             <div className="md:col-span-1">
               <div className="px-4 sm:px-0">
@@ -182,7 +182,7 @@ export default function CadastroConsumer() {
           </div>
         </div>
   
-        <div className="mt-10 sm:mt-0">
+        <div className="mt-10 sm:mt-0" style={{margin:30}}>
           <div className="md:grid md:grid-cols-3 md:gap-6">
             <div className="md:col-span-1">
               <div className="px-4 sm:px-0">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { MailIcon, PhoneIcon } from '@heroicons/react/solid'
 import { api } from '../../services/api';
 

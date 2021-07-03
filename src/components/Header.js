@@ -110,7 +110,7 @@ export default function Header() {
                             'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                           )}
                         >
-                          <span>Home</span>
+                          <a href="/">Home</a>
                           
                         </Popover.Button>
 
@@ -138,7 +138,7 @@ export default function Header() {
                   <a href="/providers" className="text-base font-medium text-gray-500 hover:text-gray-900">
                     Prestadores de Serviços
                   </a>
-                  <a href="/providers" className="text-base font-medium text-gray-500 hover:text-gray-900">
+                  <a href="/perfil" className="text-base font-medium text-gray-500 hover:text-gray-900">
                     Perfil
                   </a>
                   <Popover>
