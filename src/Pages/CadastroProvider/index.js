@@ -23,27 +23,32 @@ export default function CadastroProvider() {
 
   async function createProvider(event){
     event.preventDefault();
-    const user = {
-      name: nameUser, 
-      email: email,
-      lastName: lastName,
-      about: about,
-      password: password
-    };   
-    const addressUser = {
-      cep: cep,
-      numero: numero,
-      rua: rua,
-      cidade: cidade,
-      pais: pais,
-      estado: estado
-    }   
-    const {id} = await createUser({user});
-    
-    const addressId = await endUser({addressUser}, id);
-    console.log(addressId)
-    const provider = await createServiceProvider(id);
-    history.push('/')
+    try {
+      const user = {
+        name: nameUser, 
+        email: email,
+        lastName: lastName,
+        about: about,
+        password: password
+      };   
+      const addressUser = {
+        cep: cep,
+        numero: numero,
+        rua: rua,
+        cidade: cidade,
+        pais: pais,
+        estado: estado
+      };
+      const responseUser = await Promise.all(createUser({user}))
+      const dataUser = responseUser.data;
+      
+      const addressId = await endUser({addressUser}, dataUser.id);
+      
+      const provider = await createServiceProvider(dataUser.id);
+      history.push('/')
+    } catch (err){
+      return new Error("Erro ao tentar cadastrar")
+    }        
   }
   return (
         <>       

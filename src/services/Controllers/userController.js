@@ -17,7 +17,7 @@ async function createUser({user}){
 
 //Cadastrar Endereco
 async function endUser({address}, userId) {
-  const {cep, numero, rua, cidade, pais, estado} = address;
+  const {cep, numero, rua, cidade, pais, estado} = {address};
   const addressId = await api.post(`users/${userId}/addresses`,{
       cep: cep,
       numero: numero,
