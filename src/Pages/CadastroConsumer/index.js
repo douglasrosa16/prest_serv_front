@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { createUser, endUser }  from '../../services/Controllers/userController';
+import { createServiceConsumer } from '../../services/Controllers/consumerController';
 import * as Yup from 'yup';
-import { api } from '../../services/api';
 
 export default function CadastroConsumer() {  
   const history = useHistory();  
@@ -20,54 +21,35 @@ export default function CadastroConsumer() {
   const [numero, setNumero] = useState('');
   const [pais, setPais] = useState('Brasil'); //Trazer uma lista de Paises
 
-    async function cadastrarUser(event){
-      event.preventDefault();     
-
-      const userValidate = {
+  async function createConsumer(event){
+    event.preventDefault();
+    try {
+      const user = {
         name: nameUser, 
         email: email,
-        soblastNamerenome: lastName,
+        lastName: lastName,
+        about: about,
         password: password
-      }
+      };   
+      const addressUser = {
+        cep: cep,
+        numero: numero,
+        rua: rua,
+        cidade: cidade,
+        pais: pais,
+        estado: estado
+      };
+      const responseUser = await createUser({user})
+      const dataUser = responseUser.data;
       
-      try {
-        const schema = Yup.object().shape({
-          name: Yup.string().required('Nome obrigatório'), 
-          email: Yup.string().required('E-mail obrigatório').email('Digite um e-mail válido'), 
-          lastname: Yup.string(),
-          password: Yup.string().min(5, 'No mínimo 5 dígitos')
-        });
-
-        await schema.validate(userValidate, {
-          abortEarly: false
-        });
-
-      } catch(err){
-        
-      }      
-
-      const user = await api.post('users', 
-        {
-          name: nameUser,
-          email: email,
-          lastname: lastName,
-          about: about,
-          password: password
-        }
-      );  
-      const userID = user.data.id;      
-      const endUser = await api.post(`users/${userID}/addresses`,
-        {
-          cep: cep,
-          numero: numero,
-          rua: rua,
-          cidade: cidade,
-          pais: pais,
-          estado: estado
-        }
-      );
-      history.push('/');
-    };
+      const addressId = await endUser({addressUser}, dataUser.id);
+      
+      const provider = await createServiceConsumer(dataUser.id);
+      history.push('/')
+    } catch (err){
+      return new Error("Erro ao tentar cadastrar")
+    }        
+  }  
 
     return (
         <>       
@@ -364,7 +346,7 @@ export default function CadastroConsumer() {
                     <button
                       type="submit"
                       className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                      onClick={cadastrarUser}
+                      onClick={createConsumer}
                     >
                       Salvar
                     </button>

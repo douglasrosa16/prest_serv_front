@@ -39,7 +39,7 @@ export default function CadastroProvider() {
         pais: pais,
         estado: estado
       };
-      const responseUser = await Promise.all(createUser({user}))
+      const responseUser = await createUser({user})
       const dataUser = responseUser.data;
       
       const addressId = await endUser({addressUser}, dataUser.id);
@@ -49,7 +49,7 @@ export default function CadastroProvider() {
     } catch (err){
       return new Error("Erro ao tentar cadastrar")
     }        
-  }
+  }  
   return (
         <>       
         <div style={{margin:30}}>

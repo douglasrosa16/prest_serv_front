@@ -1,8 +1,8 @@
 import { api } from '../api';
 //Cadastrar o Prestador de Serviço
-async function createServiceProvider(userId){
+function createServiceProvider(userId){
   
-  const provider = await api.post(`/provider/${userId}`, {
+  const provider = api.post(`/provider/${userId}`, {
     userId: userId
   });
   
