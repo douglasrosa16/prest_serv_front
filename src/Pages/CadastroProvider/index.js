@@ -21,6 +21,11 @@ export default function CadastroProvider() {
   const [numero, setNumero] = useState('');
   const [pais, setPais] = useState('Brasil'); //Trazer uma lista de Paises   
 
+  useEffect(() => {
+    setPassword('')
+    setEmail('')
+  },[])
+
   async function createProvider(event){
     event.preventDefault();
     try {
@@ -84,8 +89,7 @@ export default function CadastroProvider() {
                           name="about"
                           rows={3}
                           className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
-                          placeholder="Descreva suas habilidades"
-                          defaultValue={''}
+                          placeholder="Descreva suas habilidades"                          
                         />
                       </div>
                       <p className="mt-2 text-sm text-gray-500">
