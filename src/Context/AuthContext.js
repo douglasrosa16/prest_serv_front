@@ -8,8 +8,14 @@ const AuthProvider = ({children}) => {
   //Para caso reiniciar a página ou fechar
   const [data, setData] = useState(() => {
     const token = localStorage.getItem('@Dev:token');
-    const user = localStorage.getItem('@Dev:user');
-    
+    var user = localStorage.getItem('@Dev:user');
+    if(!user){
+      user = {
+        name: "",
+        about: "",
+        permission: ""
+      }
+    }    
     if(token && user){
       return { token, user: JSON.parse(user)};
     }
@@ -22,8 +28,7 @@ const AuthProvider = ({children}) => {
       password: password
     });
 
-    const { token, user } = response.data;
-    console.log(response.data)
+    const { token, user } = response.data;    
     localStorage.setItem('@Dev:token', token);
     localStorage.setItem('@Dev:user', JSON.stringify(user));
 

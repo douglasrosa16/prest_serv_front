@@ -1,9 +1,12 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
-import React from 'react';
+import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Cadastro() {
+import { AuthContext } from '../../Context/AuthContext';
 
+export default function Cadastro() {
+  const { user, signOut } = useContext(AuthContext);
+  
   return (
     <>
       <div className="bg-white">
@@ -18,7 +21,7 @@ export default function Cadastro() {
                 to="/cadastrar-consumidor"
                 className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
               >
-                Consumidor
+                Consumidor 
               </Link>
             </div>
             <div className="ml-3 inline-flex">              
@@ -28,7 +31,7 @@ export default function Cadastro() {
               >
                 Prestador de Serviço
               </Link>
-            </div>
+            </div>            
           </div>
         </div>
       </div>

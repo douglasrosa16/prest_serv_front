@@ -5,7 +5,7 @@ import { AuthContext } from '../../Context/AuthContext';
 export default function Perfil() {
   
   const { user } = useContext(AuthContext);
-  console.log(user.name)
+  
   return (
     <div style={{margin:30}}>
       <div>

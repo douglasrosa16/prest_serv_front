@@ -1,7 +1,4 @@
-import { Fragment, useContext } from 'react'
-import { Link } from 'react-router-dom';
-import { AuthContext } from '../Context/AuthContext';
-
+import { Fragment, useContext} from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import {
   BookmarkAltIcon,
@@ -23,6 +20,8 @@ import {
   XIcon,
 } from '@heroicons/react/outline'
 import { ChevronDownIcon } from '@heroicons/react/solid'
+
+import { AuthContext } from '../Context/AuthContext';
 
 const solutions = [
   {
@@ -69,13 +68,8 @@ function classNames(...classes) {
 }
 
 export default function Header() {
-  
-  //const { signOut } = useContext(AuthContext); // Não funcionou
-  function signOut(){
-    localStorage.removeItem('@Dev:token');
-    localStorage.removeItem('@Dev:user');
-  }
-
+  const { user, signOut } = useContext(AuthContext);
+  console.log(user)
   return (
     <Popover className="relative bg-white">
       {({ open }) => (
@@ -92,18 +86,12 @@ export default function Header() {
                     alt=""
                   />
                 </a>
-              </div>
-              <div className="-mr-2 -my-2 md:hidden">
-                <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-                  <span className="sr-only">Open menu</span>
-                  <MenuIcon className="h-6 w-6" aria-hidden="true" />
-                </Popover.Button>
-              </div>
+              </div>            
               <div className="hidden md:flex-1 md:flex md:items-center md:justify-between">
                 <Popover.Group as="nav" className="flex space-x-10">
                   <Popover>
                     {({ open }) => (
-                      <>
+                      <>                        
                         <Popover.Button
                           className={classNames(
                             open ? 'text-gray-900' : 'text-gray-500',
@@ -134,7 +122,11 @@ export default function Header() {
                       </>
                     )}
                   </Popover>
-                  
+                  {user.name=='Douglas' ?  <a href="/providers" className="text-base font-medium text-gray-500 hover:text-gray-900">
+                    Meus serviços
+                  </a>
+                  : null
+                  }
                   <a href="/providers" className="text-base font-medium text-gray-500 hover:text-gray-900">
                     Prestadores de Serviços
                   </a>
@@ -144,8 +136,6 @@ export default function Header() {
                   <Popover>
                     {({ open }) => (
                       <>
-                        
-
                         <Transition
                           show={open}
                           as={Fragment}

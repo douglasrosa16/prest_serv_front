@@ -6,7 +6,7 @@ import { AuthContext } from '../../Context/AuthContext';
 export default function Login(){
   const history = useHistory();
   
-  const { signIn, user } = useContext(AuthContext);
+  const { signIn } = useContext(AuthContext);
   const [values, setValues] = useState(initialState);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -87,7 +87,7 @@ export default function Login(){
               </div>
 
               <div className="text-sm">
-                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                <a href="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
                   Esqueceu sua senha?
                 </a>
               </div>
@@ -116,7 +116,7 @@ export default function Login(){
             <div className="mt-6 grid grid-cols-3 gap-3">
               <div>
                 <a
-                  href="#"
+                  href="www.facebook.com"
                   className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                 >
                   <span className="sr-only">Login com o Facebook</span>
@@ -132,7 +132,7 @@ export default function Login(){
 
               <div>
                 <a
-                  href="#"
+                  href="www.twitter.com"
                   className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                 >
                   <span className="sr-only">Login com o Twitter</span>

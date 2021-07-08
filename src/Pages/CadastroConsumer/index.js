@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { createUser, endUser }  from '../../services/Controllers/userController';
@@ -44,7 +44,7 @@ export default function CadastroConsumer() {
       
       const addressId = await endUser({addressUser}, dataUser.id);
       
-      const provider = await createServiceConsumer(dataUser.id);
+      const consumer = await createServiceConsumer(dataUser.id);
       history.push('/')
     } catch (err){
       return new Error("Erro ao tentar cadastrar")
