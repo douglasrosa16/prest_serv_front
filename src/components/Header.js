@@ -68,11 +68,14 @@ function classNames(...classes) {
 }
 
 export default function Header() {
-  const { user, signOut } = useContext(AuthContext);
+  const { user, signOut } = useContext(AuthContext); 
+  
   useEffect(() => {
-    user.permission = ''
-  }, [user])
+    console.log('hello')
+  }, []);
+
   return (
+    
     <Popover className="relative bg-white">
       {({ open }) => (
         <>
