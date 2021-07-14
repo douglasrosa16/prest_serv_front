@@ -29,7 +29,8 @@ export default function CadastroConsumer() {
         email: email,
         lastName: lastName,
         about: about,
-        password: password
+        password: password,
+        permission: 'consumer'
       };   
       const addressUser = {
         cep: cep,

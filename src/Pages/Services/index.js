@@ -2,6 +2,10 @@ import { Fragment } from 'react'
 import { Menu, Popover, Transition } from '@headlessui/react'
 import { SearchIcon } from '@heroicons/react/solid'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import { CalendarIcon, LocationMarkerIcon, UsersIcon } from '@heroicons/react/solid'
+
+import ListServices from '../ListServices/index';
+import { createServices } from '../../services/Controllers/servicesController'
 
 const user = {
   name: 'Chelsea Hagon',
@@ -26,6 +30,12 @@ function classNames(...classes) {
 }
 
 export default function Service() {
+
+  async function onSubmit(){
+    const response = await createServices(user.id);
+
+  }
+
   return (
     <>
       {/* When the mobile menu is open, add `overflow-hidden` to the `body` element to prevent double scrollbars */}
@@ -43,21 +53,13 @@ export default function Service() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-8">
                 <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-2">
-                  <div className="flex-shrink-0 flex items-center">
-                    <a href="#">
-                      <img
-                        className="block h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
-                        alt="Workflow"
-                      />
-                    </a>
-                  </div>
+                  
                 </div>
                 <div className="min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-6">
                   <div className="flex items-center px-6 py-4 md:max-w-3xl md:mx-auto lg:max-w-none lg:mx-0 xl:px-0">
                     <div className="w-full">
                       <label htmlFor="search" className="sr-only">
-                        Search
+                        Consultar serviços
                       </label>
                       <div className="relative">
                         <div className="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
@@ -67,7 +69,7 @@ export default function Service() {
                           id="search"
                           name="search"
                           className="block w-full bg-white border border-gray-300 rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                          placeholder="Search"
+                          placeholder="Consultar Serviços"
                           type="search"
                         />
                       </div>
@@ -140,10 +142,10 @@ export default function Service() {
                   </Menu>
 
                   <a
-                    href="#"
+                    href={onSubmit}
                     className="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
-                    New Project
+                    Novo
                   </a>
                 </div>
               </div>
@@ -193,11 +195,12 @@ export default function Service() {
                     </a>
                   ))}
                 </div>
-              </div>
+              </div>              
             </Popover.Panel>
           </>
-        )}
+        )}        
       </Popover>
+      <ListServices filtro="texto"/>
     </>
   )
 }

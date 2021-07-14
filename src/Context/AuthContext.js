@@ -19,7 +19,7 @@ const AuthProvider = ({children}) => {
     if(token && user){
       return { token, user: JSON.parse(user)};
     }
-    return {};    
+    return {user};    
   });
 
   async function signIn ({email, password}){    
@@ -38,8 +38,12 @@ const AuthProvider = ({children}) => {
   function signOut(){    
     localStorage.removeItem('@Dev:token');
     localStorage.removeItem('@Dev:user');
-
-    setData({});
+    var user = {
+      name: "",
+      about: "",
+      permission: ""
+    };    
+    setData({user});
   }
   
   return (

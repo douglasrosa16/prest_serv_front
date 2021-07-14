@@ -34,7 +34,8 @@ export default function CadastroProvider() {
         email: email,
         lastName: lastName,
         about: about,
-        password: password
+        password: password,
+        permission: 'provider'
       };   
       const addressUser = {
         cep: cep,

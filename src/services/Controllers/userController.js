@@ -3,14 +3,15 @@ import { api } from '../api';
 //Cadastrar Usuario
 async function createUser({user}){
   
-  const {name, email, lastname, about, password} = user;
+  const {name, email, lastname, about, password, permission} = user;
   
   const userId = await api.post('users',{
     name: name,
     email: email,
     lastname: lastname,
     about: about,
-    password: password
+    password: password,
+    permission: permission
   });
  return userId;
 }

@@ -1,4 +1,4 @@
-import { Fragment, useContext} from 'react'
+import { Fragment, useContext, useEffect} from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import {
   BookmarkAltIcon,
@@ -69,7 +69,9 @@ function classNames(...classes) {
 
 export default function Header() {
   const { user, signOut } = useContext(AuthContext);
-  console.log(user)
+  useEffect(() => {
+    user.permission = ''
+  }, [user])
   return (
     <Popover className="relative bg-white">
       {({ open }) => (
@@ -122,10 +124,10 @@ export default function Header() {
                       </>
                     )}
                   </Popover>
-                  {user.name=='Douglas' ?  <a href="/providers" className="text-base font-medium text-gray-500 hover:text-gray-900">
+                  {user.permission==='provider' ?  <a href={"/services/"+user.id}  className="text-base font-medium text-gray-500 hover:text-gray-900">
                     Meus serviços
                   </a>
-                  : null
+                  : ''
                   }
                   <a href="/providers" className="text-base font-medium text-gray-500 hover:text-gray-900">
                     Prestadores de Serviços

@@ -2,10 +2,7 @@
 import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
 
-import { AuthContext } from '../../Context/AuthContext';
-
-export default function Cadastro() {
-  const { user, signOut } = useContext(AuthContext);
+export default function Cadastro() {  
   
   return (
     <>
