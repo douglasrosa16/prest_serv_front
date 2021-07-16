@@ -10,7 +10,7 @@ script:
   - docker run -e CI=true douglasrosa16/prest_serv_front npm run test
 
 deploy:
-  provider: elasticbeanstalk
+  provider: elasticbeanstalk 
   region: "us-east-2"
   app: "prest_serv_front"
   env: "Prestservfront-env"
