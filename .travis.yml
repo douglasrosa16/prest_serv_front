@@ -11,7 +11,8 @@ script:
 
 deploy:
   provider: s3   
-  bucket_name: "S3 Bucket"                  
+  bucket_name: "prest_serv_front"     
+  bucket_path: "prest_serv_front"             
   skip_cleanup: true
   on:
     branch: main
