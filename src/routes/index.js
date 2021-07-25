@@ -1,14 +1,17 @@
 import { Switch, Route, BrowserRouter, Redirect} from 'react-router-dom';
 
+import Header from '../components/Header'
+
 import Dashboard from '../Pages/Dashboard';
 import Login from '../Pages/Login';
-import HomeCadastro from '../Pages/HomeCadastro/index';
-import CadastroProvider from '../Pages/CadastroProvider/index';
-import CadastroConsumer from '../Pages/CadastroConsumer/index';
-import CadastroService from '../Pages/CadastroService/index';
-import Providers from '../Pages/Providers/index';
-import Perfil from '../Pages/Perfil/index';
-import Services from '../Pages/Services/index';
+import HomeCadastro from '../Pages/HomeCadastro';
+import CadastroProvider from '../Pages/CadastroProvider';
+import CadastroConsumer from '../Pages/CadastroConsumer';
+import CadastroService from '../Pages/CadastroService';
+import Providers from '../Pages/Providers';
+import Perfil from '../Pages/Perfil';
+import Services from '../Pages/Services';
+import Error from '../Pages/Error'
 
 import { AuthProvider } from '../Context/AuthContext';
 import { isAuthenticated } from '../services/verifyAuth';
@@ -30,6 +33,7 @@ export default function Routes() {
     return (
         <BrowserRouter>
             <AuthProvider>
+                <Header />
                 <Switch>
                     <Route path="/" exact component={Dashboard}/>
                     <Route path="/pre-cadastro" exact component={HomeCadastro} />                
@@ -41,6 +45,8 @@ export default function Routes() {
                     <PrivateRoute path="/services/:id" exact component={Services}/>
                     <PrivateRoute path="/perfil" exact component={Perfil} />  
                     <PrivateRoute path="/cadastrar-service" exact component={CadastroService}/>
+
+                    <Route path="*" component={Error} />
                 </Switch>    
             </AuthProvider>
         </BrowserRouter>

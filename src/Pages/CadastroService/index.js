@@ -1,7 +1,35 @@
+import { createServices } from '../../services/Controllers/servicesController';
+import { useHistory } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../Context/AuthContext';
+
+
 export default function CadastroService() {
+  const history = useHistory();
+  const { user } = useContext(AuthContext)
+  const categorias = [
+    {id: 1, tipo:"Encanador"},
+    {id: 2, tipo:"Pedreiro"},
+    {id: 3, tipo:"Serviços Gerais"},
+    {id: 4, tipo:"Ajudante de Pedreiro"},
+    {id: 5, tipo:"Pintor"},
+    {id: 6, tipo:"Eletricista"},
+    {id: 7, tipo:"Aux. Doméstica"},
+    {id: 8, tipo:"Jardineiro"},
+    {id: 9, tipo:"Carpinteiro"},
+    {id: 10, tipo:"Mestre de Obras"},
+    {id: 11, tipo:"Caseiro"},
+    {id: 12, tipo:"Frete"}
+  ]
+
+  function cadastrarServico(){    
+    createServices(user.id)  
+    history.push(`/services/${user.id}`);
+  }
+
   return (
     <>      
-      <div style={{margin:30}}>
+      <div style={{margin:30}}>        
         <div className="mt-10 sm:mt-0">
           <div className="md:grid md:grid-cols-3 md:gap-6">
             <div className="md:col-span-1">
@@ -63,17 +91,18 @@ export default function CadastroService() {
                           name="country"
                           autoComplete="country"
                           className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        >
-                          <option>Encanador</option>
-                          <option>Pedreiro</option>
-                          <option>Pintor</option>
+                        >                          
+                          {categorias.map((categoria) => (
+                              <option key={categoria.id} value={categoria.id}> {categoria.tipo}</option>  
+                            )) 
+                          }                          
                         </select>
                       </div>                    
                     </div>
                   </div>
                   <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                     <button
-                      type="submit"
+                      onClick={(e) => (cadastrarServico(e))}
                       className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                       Salvar

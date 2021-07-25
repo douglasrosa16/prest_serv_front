@@ -1,8 +1,9 @@
 import { Fragment } from 'react'
+import { Link } from 'react-router-dom';
 import { Menu, Popover, Transition } from '@headlessui/react'
 import { SearchIcon } from '@heroicons/react/solid'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
-import { CalendarIcon, LocationMarkerIcon, UsersIcon } from '@heroicons/react/solid'
+
 
 import ListServices from '../ListServices/index';
 import { createServices } from '../../services/Controllers/servicesController'
@@ -141,12 +142,12 @@ export default function Service() {
                     )}
                   </Menu>
 
-                  <a
-                    href={onSubmit}
+                  <Link
+                    to={"/cadastrar-service"}
                     className="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Novo
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

@@ -1,5 +1,5 @@
 import React, { useState, useContext} from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 import { AuthContext } from '../../Context/AuthContext';
 
@@ -87,9 +87,9 @@ export default function Login(){
               </div>
 
               <div className="text-sm">
-                <a href="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
+                <Link href="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
                   Esqueceu sua senha?
-                </a>
+                </Link>
               </div>
             </div>
 
