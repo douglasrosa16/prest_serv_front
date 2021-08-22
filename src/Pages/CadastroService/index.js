@@ -69,7 +69,7 @@ export default function CadastroService() {
                         </label>
                         <input
                           value={value}
-                          onChange={setValue(e.target.value)}
+                          
                           type="number"
                           name="value"
                           id="value"
