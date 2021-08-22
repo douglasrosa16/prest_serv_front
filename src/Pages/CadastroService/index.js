@@ -1,10 +1,15 @@
 import { createServices } from '../../services/Controllers/servicesController';
 import { useHistory } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
 
 
 export default function CadastroService() {
+  const [photo, setPhoto] = useState('');
+  const [title, setTitle] = useState('');
+  const [about, setAbout] = useState('');
+  const [value, setValue] = useState('');
+
   const history = useHistory();
   const { user } = useContext(AuthContext)
   const categorias = [
@@ -23,7 +28,7 @@ export default function CadastroService() {
   ]
 
   function cadastrarServico(){    
-    createServices(user.id)  
+    createServices(user.id);
     history.push(`/services/${user.id}`);
   }
 
@@ -48,6 +53,8 @@ export default function CadastroService() {
                           Serviço
                         </label>
                         <input
+                          value={title}
+                          onChange={setTitle}
                           type="text"
                           name="first-name"
                           id="first-name"
@@ -61,6 +68,8 @@ export default function CadastroService() {
                           Valor R$
                         </label>
                         <input
+                          value={value}
+                          onChange={setValue(e.target.value)}
                           type="number"
                           name="value"
                           id="value"
@@ -74,6 +83,8 @@ export default function CadastroService() {
                           Descrição do serviço
                         </label>
                         <input
+                          value={about}
+                          
                           type="text"
                           name="email-address"
                           id="email-address"
