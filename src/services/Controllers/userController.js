@@ -4,7 +4,7 @@ import { api } from '../api';
 async function createUser({user}){
   
   const {name, email, lastname, about, password, permission} = user;
-  
+  console.log(user);
   const userId = await api.post('users',{
     name: name,
     email: email,
