@@ -1,6 +1,5 @@
 import { CalendarIcon, LocationMarkerIcon, UsersIcon } from '@heroicons/react/solid'
-import {useContext} from 'react';
-import { AuthContext } from '../../Context/AuthContext';
+
 const positions = [
   {
     id: 1,
@@ -31,8 +30,7 @@ const positions = [
   },
 ]
 
-export default function ListServices() {
-  const { user } = useContext(AuthContext);
+export default function ListServices() { 
   
   return (
     <div className="bg-white shadow overflow-hidden sm:rounded-md">

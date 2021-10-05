@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import * as Yup from 'yup';
 import { createUser, endUser }  from '../../services/Controllers/userController';
 import { createServiceProvider } from '../../services/Controllers/serviceProviderController';
 
@@ -48,9 +47,9 @@ export default function CadastroProvider() {
       const responseUser = await createUser({user})
       const dataUser = responseUser.data;
       
-      const addressId = await endUser({addressUser}, dataUser.id);
+      await endUser({addressUser}, dataUser.id);
       
-      const provider = await createServiceProvider(dataUser.id);
+      await createServiceProvider(dataUser.id);
       history.push('/')
     } catch (err){
       return new Error("Erro ao tentar cadastrar")

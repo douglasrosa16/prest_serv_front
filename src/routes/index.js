@@ -9,6 +9,8 @@ import CadastroService from '../Pages/CadastroService/index';
 import Providers from '../Pages/Providers/index';
 import Perfil from '../Pages/Perfil/index';
 import Services from '../Pages/Services/index';
+import Error from '../Pages/Error';
+
 
 import { AuthProvider } from '../Context/AuthContext';
 import { isAuthenticated } from '../services/verifyAuth';
@@ -41,6 +43,7 @@ export default function Routes() {
                     <PrivateRoute path="/services/:id" exact component={Services}/>
                     <PrivateRoute path="/perfil" exact component={Perfil} />  
                     <PrivateRoute path="/cadastrar-service" exact component={CadastroService}/>
+                    <Route path="*" component={Error}/>
                 </Switch>    
             </AuthProvider>
         </BrowserRouter>

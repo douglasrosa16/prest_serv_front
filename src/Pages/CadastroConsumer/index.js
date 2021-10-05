@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 
 import { createUser, endUser }  from '../../services/Controllers/userController';
 import { createServiceConsumer } from '../../services/Controllers/consumerController';
-import * as Yup from 'yup';
 
 export default function CadastroConsumer() {  
   const history = useHistory();  
@@ -43,9 +42,9 @@ export default function CadastroConsumer() {
       const responseUser = await createUser({user})
       const dataUser = responseUser.data;
       
-      const addressId = await endUser({addressUser}, dataUser.id);
+      await endUser({addressUser}, dataUser.id);
       
-      const consumer = await createServiceConsumer(dataUser.id);
+      await createServiceConsumer(dataUser.id);
       history.push('/')
     } catch (err){
       return new Error("Erro ao tentar cadastrar")
