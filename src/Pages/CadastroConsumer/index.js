@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom';
 import { createUser, endUser }  from '../../services/Controllers/userController';
 import { createServiceConsumer } from '../../services/Controllers/consumerController';
 
+import { UF } from '../../assets/static/uf-city-brazil';
+
 export default function CadastroConsumer() {  
   const history = useHistory();  
 
@@ -14,12 +16,12 @@ export default function CadastroConsumer() {
   const [email, setEmail] = useState('');
   const [about, setAbout] = useState('');
   const [cep, setCep] = useState('');
-  const [estado, setEstado] = useState('');
+  const [estado, setEstado] = useState(UF);
   const [cidade, setCidade] = useState('');
   const [rua, setRua] = useState('');
   const [numero, setNumero] = useState('');
-  const [pais, setPais] = useState('Brasil'); //Trazer uma lista de Paises
-
+  const [pais, setPais] = useState('Brasil'); 
+ 
   async function createConsumer(event){
     event.preventDefault();
     try {
@@ -71,28 +73,7 @@ export default function CadastroConsumer() {
                       <div className="col-span-3 sm:col-span-2">
                        
                       </div>
-                    </div>
-  
-                    <div>
-                      <label htmlFor="about" className="block text-sm font-medium text-gray-700">
-                        Sobre
-                      </label>
-                      <div className="mt-1">
-                        <textarea
-                          value={about}
-                          onChange={(e) => setAbout(e.target.value)}
-                          id="about"
-                          name="about"
-                          rows={3}
-                          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
-                          placeholder="Descreva suas habilidades"
-                          defaultValue={''}
-                        />
-                      </div>
-                      <p className="mt-2 text-sm text-gray-500">
-                        Breve descrição sobre seu serviço
-                      </p>
-                    </div>
+                    </div>                  
   
                     <div>
                       <label className="block text-sm font-medium text-gray-700">Foto</label>
@@ -262,70 +243,10 @@ export default function CadastroConsumer() {
                           autoComplete="country"
                           className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         >
-                          <option>Brasil</option>
-                          <option>Canada</option>
-                          <option>EUA</option>
+                          <option>Brasil</option>                          
                         </select>
                       </div>
-  
-                      <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-                        <label htmlFor="street_address" className="block text-sm font-medium text-gray-700">
-                          Rua
-                        </label>
-                        <input
-                          value={rua}
-                          onChange={(e) => setRua(e.target.value)}
-                          type="text"
-                          name="street_address"
-                          id="street_address"
-                          autoComplete="street-address"
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        />
-                      </div>
                       
-                      <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-                        <label htmlFor="street_address" className="block text-sm font-medium text-gray-700">
-                          Numero
-                        </label>
-                        <input
-                          value={numero}
-                          onChange={(e) => setNumero(e.target.value)}
-                          type="text"
-                          name="street_address"
-                          id="street_address"
-                          autoComplete="street-address"
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        />
-                      </div>
-
-                      <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-                        <label htmlFor="city" className="block text-sm font-medium text-gray-700">
-                          Cidade
-                        </label>
-                        <input
-                          value={cidade}
-                          onChange={(e) => setCidade(e.target.value)}
-                          type="text"
-                          name="city"
-                          id="city"
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        />
-                      </div>
-  
-                      <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                        <label htmlFor="state" className="block text-sm font-medium text-gray-700">
-                          Estado
-                        </label>
-                        <input
-                          value={estado}
-                          onChange={(e) => setEstado(e.target.value)}
-                          type="text"
-                          name="state"
-                          id="state"
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        />
-                      </div>
-  
                       <div className="col-span-6 sm:col-span-3 lg:col-span-2">
                         <label htmlFor="postal_code" className="block text-sm font-medium text-gray-700">
                           CEP
@@ -340,6 +261,70 @@ export default function CadastroConsumer() {
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
+
+                      <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+                        <label htmlFor="state" className="block text-sm font-medium text-gray-700">
+                          Estado
+                        </label>
+                        <select
+                          id="country"
+                          name="country"
+                          autoComplete="country"
+                          className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        >
+                          {estado !== null ? 
+                            estado.map((item) => 
+                              <option value={item.nome}>{item.nome}</option>  
+                            )
+                          :
+                            ""
+                          }                          
+                        </select>
+                      </div>     
+
+                      <div className="col-span-6 sm:col-span-6 lg:col-span-2">
+                        <label htmlFor="city" className="block text-sm font-medium text-gray-700">
+                          Cidade
+                        </label>
+                        <input
+                          value={cidade}
+                          onChange={(e) => setCidade(e.target.value)}
+                          type="text"
+                          name="city"
+                          id="city"
+                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        />
+                      </div>
+
+                      <div className="col-span-6 sm:col-span-6 lg:col-span-2">
+                        <label htmlFor="street_address" className="block text-sm font-medium text-gray-700">
+                          Rua
+                        </label>
+                        <input
+                          value={rua}
+                          onChange={(e) => setRua(e.target.value)}
+                          type="text"
+                          name="street_address"
+                          id="street_address"
+                          autoComplete="street-address"
+                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        />
+                      </div>                          
+
+                      <div className="col-span-6 sm:col-span-6 lg:col-span-2">
+                        <label htmlFor="street_address" className="block text-sm font-medium text-gray-700">
+                          Numero
+                        </label>
+                        <input
+                          value={numero}
+                          onChange={(e) => setNumero(e.target.value)}
+                          type="text"
+                          name="street_address"
+                          id="street_address"
+                          autoComplete="street-address"
+                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        />
+                      </div>                  
                     </div>
                   </div>
                   <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
