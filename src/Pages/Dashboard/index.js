@@ -84,9 +84,7 @@ export default function Example() {
             </h2>
             <div className="mt-6 text-gray-500 space-y-6">
               <p className="text-lg">
-                Sagittis scelerisque nulla cursus in enim consectetur quam. Dictum urna sed consectetur neque tristique
-                pellentesque. Blandit amet, sed aenean erat arcu morbi. Cursus faucibus nunc nisl netus morbi vel
-                porttitor vitae ut. Amet vitae fames senectus vitae.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus, libero! Ab unde hic laudantium, modi dolorum voluptates obcaecati ex tenetur recusandae quaerat nemo, corrupti accusantium assumenda autem voluptatibus delectus rerum!
               </p>
               <p className="text-base leading-7">
                 Sollicitudin tristique eros erat odio sed vitae, consequat turpis elementum. Lorem nibh vel, eget
